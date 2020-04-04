@@ -12,6 +12,7 @@ class CategoryMealScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final routeArgs =
         ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+    // i use dynamic: reason being that arguments passed can be anything from String, int, Function etc
 
     String categoryTitle = routeArgs['title'];
     String categoryId = routeArgs['id'];
