@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CategoryMealScreen extends StatelessWidget {
-  static String id = "category_meal_screen";
+  static const String id = "category_meal_screen";
 
 //  final String categoryId;
 //  final String categoryTitle;
@@ -22,7 +22,7 @@ class CategoryMealScreen extends StatelessWidget {
         title: Text(categoryTitle),
       ),
       body: Center(
-        child: Text('The Recipes for The Category'),
+        child: const Text('The Recipes for The Category'),
       ),
     );
   }
