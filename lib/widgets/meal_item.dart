@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mealsapp/model/meal.dart';
 
@@ -69,11 +70,12 @@ class MealItem extends StatelessWidget {
                     topLeft: Radius.circular(15.0),
                     topRight: Radius.circular(15.0),
                   ),
-                  child: Image.network(
-                    imageUrl,
-                    height: 250,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(height: 250),
+                    child: FadeInImage(
+                        image: NetworkImage(imageUrl),
+                        placeholder: AssetImage('assets/food.jpg'),
+                        fit: BoxFit.cover),
                   ),
                 ),
                 Positioned(
@@ -86,10 +88,7 @@ class MealItem extends StatelessWidget {
                         EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
                     child: Text(
                       title,
-                      style: TextStyle(
-                        fontSize: 26,
-                        color: Colors.white,
-                      ),
+                      style: TextStyle(fontSize: 26, color: Colors.white),
                       softWrap: true,
                       overflow: TextOverflow.fade,
                     ),
