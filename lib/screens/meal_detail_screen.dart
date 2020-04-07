@@ -1,0 +1,15 @@
+import 'package:flutter/material.dart';
+
+class MealDetailScreen extends StatelessWidget {
+  static const String id = 'meal_detail_screen';
+  @override
+  Widget build(BuildContext context) {
+    String mealId = ModalRoute.of(context).settings.arguments as String;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('$mealId'),
+      ),
+      body: Center(child: Text('The meal - $mealId!')),
+    );
+  }
+}
