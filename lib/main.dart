@@ -30,6 +30,19 @@ class MyApp extends StatelessWidget {
         CategoryMealScreen.id: (ctx) => CategoryMealScreen(),
         MealDetailScreen.id: (ctx) => MealDetailScreen()
       },
+      onGenerateRoute: (settings) {
+        print(settings.arguments);
+        //watch video again for your need
+        //when route us not defined in routes
+        //useful while still building your app to assist to do some navigation
+        //till you generate define screen
+      },
+      onUnknownRoute: (settings) {
+        //more like error handler 404
+        //fall back
+        //if error occurs, build a not found screen n define here
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      },
     );
   }
 }
