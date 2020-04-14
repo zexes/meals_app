@@ -1,28 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:mealsapp/widgets/meal_item.dart';
+import '../model/meal.dart';
+import '../widgets/meal_item.dart';
 
 import '../dummy_data.dart';
 
-class CategoryMealScreen extends StatelessWidget {
+class CategoryMealScreen extends StatefulWidget {
   static const String id = "category_meal_screen";
 
-//  final String categoryId;
-//  final String categoryTitle;
-//
-//  const CategoryMealScreen({this.categoryId, this.categoryTitle});
+  @override
+  _CategoryMealScreenState createState() => _CategoryMealScreenState();
+}
+
+class _CategoryMealScreenState extends State<CategoryMealScreen> {
+  String categoryTitle;
+  List<Meal> categoryMeals;
+  bool _loadedData = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_loadedData) {
+      final routeArgs =
+          ModalRoute.of(context).settings.arguments as Map<String, Object>;
+      categoryTitle = routeArgs['title'];
+      final categoryId = routeArgs['id'];
+      categoryMeals = DUMMY_MEALS.where((meal) {
+        return meal.categories.contains(categoryId);
+      }).toList();
+      _loadedData = true;
+    }
+  }
+
+  void _removeMeal(String mealId) {
+    setState(() {
+      categoryMeals.removeWhere((meal) => meal.id == mealId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
-    // i use dynamic: reason being that arguments passed can be anything from String, int, Function etc
-
-    final String categoryTitle = routeArgs['title'];
-    final categoryId = routeArgs['id'];
-    final categoryMeals = DUMMY_MEALS.where((meal) {
-      return meal.categories.contains(categoryId);
-    }).toList();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryTitle),
@@ -39,6 +56,7 @@ class CategoryMealScreen extends StatelessWidget {
               complexity: meal.complexity,
               duration: meal.duration,
               imageUrl: meal.imageUrl,
+              removeItem: _removeMeal,
             );
           },
           itemCount: categoryMeals.length,
