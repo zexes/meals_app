@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mealsapp/widgets/main_drawer.dart';
 
 class FiltersScreen extends StatelessWidget {
   static const String id = 'filters_screen';
@@ -9,6 +10,7 @@ class FiltersScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Filters'),
       ),
+      drawer: MainDrawer(),
       body: Center(
         child: Text('Filters!'),
       ),

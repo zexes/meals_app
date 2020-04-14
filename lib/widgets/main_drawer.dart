@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mealsapp/screens/meal_detail_screen.dart';
+import 'package:mealsapp/screens/tab_screen.dart';
 import '../screens/filters_screen.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -43,9 +45,15 @@ class MainDrawer extends StatelessWidget {
             height: 20.0,
           ),
           buildSectionTile(
-              Icons.restaurant, 'Meals', () => Navigator.of(context).pop()),
-          buildSectionTile(Icons.settings, 'Filters',
-              () => Navigator.of(context).pushNamed(FiltersScreen.id)),
+              Icons.restaurant,
+              'Meals',
+              () => Navigator.of(context).pushReplacementNamed(TabsScreen
+                  .id)), //if pushReplacement, then we use MaterialPageoute
+          buildSectionTile(
+              Icons.settings,
+              'Filters',
+              () =>
+                  Navigator.of(context).pushReplacementNamed(FiltersScreen.id)),
         ],
       ),
     );
