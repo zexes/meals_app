@@ -86,6 +86,7 @@ class MealDetailScreen extends StatelessWidget {
           children: <Widget>[Icon(Icons.arrow_back), Icon(Icons.delete)],
         ),
         onPressed: () => Navigator.of(context).pop(mealId),
+        tooltip: 'Temporary removal from category not from Main List',
       ),
     );
   }
