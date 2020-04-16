@@ -41,12 +41,11 @@ class MealDetailScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             ConstrainedBox(
-              constraints: BoxConstraints(
-                  minHeight: 300), //sets width to double.infinity
-              child: Image.network(
-                selectedMeal.imageUrl,
-                fit: BoxFit.cover,
-              ),
+              constraints: BoxConstraints.expand(height: 300),
+              child: FadeInImage(
+                  image: NetworkImage(selectedMeal.imageUrl),
+                  placeholder: AssetImage('assets/food.jpg'),
+                  fit: BoxFit.cover),
             ),
             buildSectionTitle(context, 'Ingredients'),
             buildList(
