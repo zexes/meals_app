@@ -16,7 +16,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favoriteMeals = [];
 
+  //TODO -1 create filters class and refactor
+  //TODO -2 use provider package to move data around e.g favoriteMeals and available meals
   Map<String, bool> _filters = {
     'gluten': false,
     'lactose': false,
@@ -46,6 +49,24 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void _toggleFavorite(String mealId) {
+    final existingIndex =
+        _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoriteMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        _favoriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+      });
+    }
+  }
+
+  bool _isMealFavorite(String id) {
+    return _favoriteMeals.any((meal) => meal.id == id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -66,11 +87,12 @@ class _MyAppState extends State<MyApp> {
 //      home: CategoriesScreen(),
       initialRoute: TabsScreen.id,
       routes: {
-        TabsScreen.id: (ctx) => TabsScreen(),
+        TabsScreen.id: (ctx) => TabsScreen(favoriteMeals: _favoriteMeals),
         CategoriesScreen.id: (ctx) => CategoriesScreen(),
         CategoryMealScreen.id: (ctx) =>
             CategoryMealScreen(availableMeals: _availableMeals),
-        MealDetailScreen.id: (ctx) => MealDetailScreen(),
+        MealDetailScreen.id: (ctx) => MealDetailScreen(
+            toggleFavorite: _toggleFavorite, isFavorite: _isMealFavorite),
         FiltersScreen.id: (ctx) => FiltersScreen(
               currentFilters: _filters,
               saveFilters: _setFilters,
