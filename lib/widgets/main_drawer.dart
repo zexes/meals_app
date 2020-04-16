@@ -48,7 +48,7 @@ class MainDrawer extends StatelessWidget {
               Icons.restaurant,
               'Meals',
               () => Navigator.of(context).pushReplacementNamed(TabsScreen
-                  .id)), //if pushReplacement, then we use MaterialPageoute
+                  .id)), //if pushReplacement, then we use MaterialPageRoute
           buildSectionTile(
               Icons.settings,
               'Filters',

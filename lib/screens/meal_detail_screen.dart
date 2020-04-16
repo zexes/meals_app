@@ -76,7 +76,7 @@ class MealDetailScreen extends StatelessWidget {
                   thickness: 2.0,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
